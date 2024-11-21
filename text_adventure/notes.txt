@@ -1,0 +1,46 @@
+How do you make this interactive? to do back and forth with input and function running??
+I think I need a different interpreter to run that maybe, cuz this one seems to take all
+inputs at once no matter how many input() lines I have.
+
+So far it's also only the player being hit. should there be monsters to attack? and then
+you have to choose which monster to fight first, it drops loot (heal potions).
+Random probability of hitting?
+    >> get a better weapon with better probability of hitting?
+    >> need an inventory to hold potions, and count how many you have left
+
+    >> turn based combat
+    >> enemy will always attack on its turn
+    >> you basically have a choice of attack, heal, run
+        >> run option will give you "well you didn't die but I guess you're a coward" lol
+    
+    >> if attack hits are random, can we win? what HP do you and the monster need for 
+    the combat to work?
+    >> what if it's always a hit but how much damage is what varies? Then mathimatically
+    you can make it so you'll always win if damage is always 1, and so you'll probably win
+    early
+
+    >> should also define an 'info' function, to remind you of your options and tell
+    you what's in your inventory. For quality of life
+
+
+
+
+"""
+Brainstorming weapon attributes
+damage - flat value
+crit rate - probability of dealing bonus damage
+crit bonus - value of bonus damage when dealt
+description - a fun lil text description of the weapon, of the type shiny sparkly sharp object
+
+Monsters:
+1 Troll
+4 Chthulu - boss
+3 Vampire
+2 Zombie
+
+monster stats:
+name
+HP
+special attack - boss only
+description
+weapon --> will it fight with the same weapon mechanics, or will it just always .hit() each turn?? tbd
