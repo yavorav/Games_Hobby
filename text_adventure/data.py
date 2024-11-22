@@ -1,7 +1,6 @@
 # this file will contain all of the weapon data and monster data
 # defined static info, but also class structure bc all weapons and monsters will have similar attributes to each other
 
-
 instructions = "Welcome to the game, your keyboard commands are 'weapons', 'fight', 'help', 'info', 'quit'. Good luck!"
 help_text = "Your keyboard commands are:\nweapons - allows you to change weapons\nfight - takes you to the monsters\nhelp - will remind you of the commands\ninfo - will show you your character stats\nquit - will exit the game"
 error_text = "Sorry, I don't understand that command. Try typing 'help' if you don't remember the commands available."
