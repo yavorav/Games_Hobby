@@ -44,3 +44,10 @@ HP
 special attack - boss only
 description
 weapon --> will it fight with the same weapon mechanics, or will it just always .hit() each turn?? tbd
+
+
+add cheat code...? which will level you up to 3 automatically?
+    >> add method to player class, cheat = False, then once they cheat it changes to True and they can't use it again
+    >> define random string in data
+    >> additional check in 'main menu', if text == cheat_code
+        >> "you've cheated and leveled up to level 3 without fighting monsters... are you really an adventurer?"
