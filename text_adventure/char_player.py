@@ -12,9 +12,9 @@ class Player:
         return int(self._hp)
 
 
-    def hit(self):
-        self._hp -= 1
-        print("You were hit")
+    def hit(self, dmg):
+        self._hp -= dmg
+        print(f"You were hit for {dmg}HP")
         if self._hp <= 0:
             print("Game over.")
     
