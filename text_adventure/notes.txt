@@ -1,6 +1,6 @@
+Brainstorming mechanics, ideas for improvement, and learning from creating this version
+
 How do you make this interactive? to do back and forth with input and function running??
-I think I need a different interpreter to run that maybe, cuz this one seems to take all
-inputs at once no matter how many input() lines I have.
 
 So far it's also only the player being hit. should there be monsters to attack? and then
 you have to choose which monster to fight first, it drops loot (heal potions).
@@ -51,3 +51,28 @@ add cheat code...? which will level you up to 3 automatically?
     >> define random string in data
     >> additional check in 'main menu', if text == cheat_code
         >> "you've cheated and leveled up to level 3 without fighting monsters... are you really an adventurer?"
+
+NEXT VERSION ============
+classes nested with inheritance for common attributes and methods..? like name, description, .info method, etc?
+    -> would need data to be in a uniform format for player, monster, weapon, whatever is gonna be nested
+    -> look into dataclass
+inventory for diff items, weapon and potions? monster manual telling you monster weaknesses?
+    -> each monster weak to a specific weapon type?
+    -> adding healing mechanic with potion that you can do during a fight or in the main menu if you ran
+    -> potion is a random drop from killing a monster, relatively low chance of dropping
+    -> if you have a potion, then the menu option shows up to use it, but if you don't have one then the option isn't there
+    -> can you hold more than 1 potion at a time? or only 1 and if you already have one then the monster can't drop one when it dies, or text
+        telling you that it dropped one but you can only hold 1 at a time (Old School RuneScape Clue style)
+monsters
+    -> once you've killed that monster type, it shouldn't be in front of you anymore, ie. can't kill troll 8 times, only once per monster type,
+        basically forcing you into the boss fight and finishing the game
+        (also forces max level of 3, fight boss, don't make it to level 4 because you kill it and win and exit before the level up part
+    -> add 'levels' to the actual game, so when you beat the boss you go to another group of monsters, more/better weapons available,
+        monsters become harder to kill somehow? more damage? better crit chance?
+fighting
+    -> how can the fight mechanics actually become harder? they are purely chance based with the crit rate now
+        can be similar to runescape, that you increase your 'to hit' chance, and then get access to better weapons that deal more damage & higher crit chance
+
+
+
+#
