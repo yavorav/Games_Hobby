@@ -13,7 +13,7 @@ monster_killed = "Congrats, you killed the "
 level_up = "You leveled up."
 hp_up = "Your max HP increased by 2 and you healed to full."
 boss_win = "You successfully killed the boss and beat the game!"
-winscreen = "---------------\nThank you for playing The Best Game Ever!!\nI hope you enjoyed it\n\nCreated by Yavora, 2024\n---------------"
+winscreen = "---------------\nThank you for playing The Best Game Ever!!\nI hope you enjoyed it.\n\nCreated by Yavora, 2024\n---------------"
 
 
 # monster dictionary, name:[description, weapon, Boss? Boolean, HP]
@@ -82,7 +82,7 @@ class Weapon:
         print("---------------")
         print(self.description)
         print("Damage: " + str(self.damage))
-        print("Crit Chance: " + str(self.crit_rate) + "%")
+        print("Crit Chance: " + str(self.crit_rate * 100) + "%")
         print("Crit Bonus Damage: " + str(self.bonus))
 
 

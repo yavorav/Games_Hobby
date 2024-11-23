@@ -11,9 +11,9 @@ display character stats once created
 welcome = "Welcome! Thank you for deciding to play The Best Game Ever. Let's get you started with a character."
 name_prompt = "Please choose a character name: "
 #ty = print("Great!")
-weapon_prompt = "Please choose a weapon from the following:\nSword\nAxe\nFists\n"
-weapon_list = data.weapons_list[:2]
-reminder = "Reminder, your weapon choices are: Sword, Axe, and Fists"
+weapon_prompt = "Please choose a weapon from the following:\nFists\nAxe\nSword\n"
+weapon_list = data.weapons_list[:3]
+reminder = "Reminder, your weapon choices are: Fists, Axe, and Sword"
 
 ###########################
 def char_create(level=1):
@@ -22,7 +22,7 @@ def char_create(level=1):
     print("Great!")
     weapon = input(weapon_prompt)
     ct = 0
-    while weapon.capitalize() not in weapon_list:
+    while weapon.title() not in weapon_list:
         print("Sorry, the weapon you chose is not an option. Please try again.")
         if ct == 3:
             print(reminder)
