@@ -1,4 +1,4 @@
-# this file will contain all of the weapon data and monster data
+# this file contains all of the weapon data and monster data
 # defined static info, but also class structure bc all weapons and monsters will have similar attributes to each other
 
 instructions = "Welcome to the game, your keyboard commands are 'weapons', 'fight', 'help', 'info', 'quit'. Good luck!"
@@ -9,19 +9,19 @@ boss_fight = "---------------\nBOSS FIGHT\n---------------"
 boss_run = "There's no running from a boss fight! Get in there and fight!"
 monster_intro2 = "You approach the "
 monster_help = "Commands for combat are 'attack' or 'run.' You can check your HP with 'info' and the monsters HP with 'monster'."
-monster_killed = "Congrats, you killed the monster."
+monster_killed = "Congrats, you killed the "
 level_up = "You leveled up."
 hp_up = "Your max HP increased by 2 and you healed to full."
-boss_win = "You successfully killed the boss "
+boss_win = "You successfully killed the boss and beat the game!"
 winscreen = "---------------\nThank you for playing The Best Game Ever!!\nI hope you enjoyed it\n\nCreated by Yavora, 2024\n---------------"
 
 
 # monster dictionary, name:[description, weapon, Boss? Boolean, HP]
 monsters = {
-    "Troll" : ["A large hairy monster often found under bridges.", "Club", False, 2], # changed to 2HP for faster debugging. Change back to 8!! 
+    "Troll" : ["A large hairy monster often found under bridges.", "Club", False, 8],
     "Zombie" : ["A putrid undead creature.", "Claws", False, 10], 
     "Vampire" : ["An undead that only comes out at night", "Fangs", False, 12], 
-    "Chthulu" : ["An unspeakable nightmare.", "Unknown", True, 4] # changed HP for debugging, should be 20 !!
+    "Chthulu" : ["An unspeakable nightmare.", "Unknown", True, 20]
     }
 monster_list = list(monsters.keys())
 
@@ -33,8 +33,8 @@ weapons = {
     "Great Axe" : ["Okay this is definitely a weapon.", 1.5, 0.45, 1],
     "Greatsword" : ["Wow, now this is a real sword.", 1.5, 0.5, 1],
     "Club" : ["A big hunk of wood.", 1, 0, 0],
-    "Claws" : ["Yikes those don't look clean.", 1, 0, 0],
-    "Fangs" : ["Please don't come that close to me.", 1, 0, 0],
+    "Claws" : ["Yikes those don't look clean.", 1, 0.1, 0.5],
+    "Fangs" : ["Please don't come that close to me.", 1, 0.1, 0.5],
     "Unknown" : ["I'm... I'm not sure how to describe what I'm looking at...", 1, 0.25, 2]
     }
 weapons_list = list(weapons.keys())
@@ -54,7 +54,9 @@ class Monster:
 
     def hit(self, dmg):
         self._hp -= dmg
-        print(f"You hit the monster for {dmg}HP")
+        if self._hp < 0:
+            self._hp = 0
+        print(f"You hit the monster for {dmg}HP, it has {self._hp}HP remaining")
         if self._hp == 0:
             print("Monster killed!")
 
@@ -84,4 +86,3 @@ class Weapon:
         print("Crit Bonus Damage: " + str(self.bonus))
 
 
-#print(monsters.keys())

@@ -6,12 +6,12 @@ import random
 
 # Calls to create a character
 
-name = "Daisy"
-weapon = "Sword"
-level = 1
-hp = (level * 2) # +10  ---removed to speed up debugging. whole line removed when running
+#name = "Daisy"
+#weapon = "Sword"
+#level = 1
+#hp = (level * 2)  +10 
 
-#name, weapon, level, hp = cc.char_create()
+name, weapon, level, hp = cc.char_create()
 player = char_player.Player(name, weapon, level, hp)
 weapon = data.Weapon(weapon)
 
@@ -20,6 +20,7 @@ print("---------------")
 def play_game():
     health = player.health()
     print(data.instructions)
+    current_monster = data.Monster(data.monster_list[0])
 
     while health > 0:
         #print("---------------")
@@ -44,6 +45,9 @@ def play_game():
             elif player.level >= 3:
                 for i in range(5):
                     print(data.weapons_list[i])
+           
+            old_weapon = data.Weapon(player.weapon)
+            old_weapon.info()
             print("Would you like to change your weapon from: " + str(player.weapon) + "?")
             x = ""
             while x != "quit":
@@ -52,7 +56,7 @@ def play_game():
                     
                     # change weapon
                     print("What weapon would you like to choose?")
-                    select = input().capitalize()
+                    select = input().title()
                     
                     y = int
                     if player.level >= 3:
@@ -64,7 +68,7 @@ def play_game():
                         if select == "Quit":
                             break
                         print("Sorry that weapon is not in the list. Please try again.")
-                        select = input().capitalize()
+                        select = input().title()
 
                     if select == "Quit":
                         break
@@ -75,10 +79,11 @@ def play_game():
 
                     player.weapon = select
                     print(f"Weapon changed. You are now wielding {player.weapon}.")
+                    #update player.weapon
                     new_weapon = data.Weapon(player.weapon)
                     new_weapon.info()
                     break
-                    # when choosing then have to update player.weapon, and weapon.Weapon choice, to have correct weapon damage data...
+                    # when choosing then have to update player.weapon, and weapon.Weapon choice
                 
                 elif x == "n" or x == "no":
                     # print keeping weapon whatever
@@ -93,7 +98,7 @@ def play_game():
             print(data.monster_intro)
             for i in range(len(data.monster_list)):
                 print(data.monster_list[i])
-                #can i remove the monsters that you've fought already? forcing you to fight each of the monsters?
+                
 
             mons = input().capitalize()
             
@@ -101,7 +106,6 @@ def play_game():
             while fighting == True: # while in the fight menu
                 turn = ""
                 player_weapon = data.Weapon(player.weapon)
-                
             
                 if mons == "Run":
                     print("Coward...")
@@ -110,7 +114,15 @@ def play_game():
                     print("Sorry, that's not one of the monsters in front of you. Please try again.")
                     mons = input().capitalize()
                 else:
-                    monster = data.Monster(mons)
+                    #if you go back to the same monster, should keep it's HP
+                    if mons == current_monster.name:
+                        #if it's the same, use the same
+                        monster = current_monster
+                    else:
+                        # if it's not the same, create the new object, and reassign global current_monster to compare to next time
+                        monster = data.Monster(mons)
+                        current_monster = monster
+
                     monster_weapon = data.Weapon(monster.weapon)
                     if monster.boss == True:
                         print(data.boss_fight)
@@ -118,47 +130,92 @@ def play_game():
                     print(data.monster_intro2 + str(monster.name) + ". ")
                     print(data.monster_help)
                     
-                    while turn != "quit":
+                    monster_selected = True
+                    while monster_selected == True:
                         turn = input().lower()
                         if turn == "attack":
                             # attack
                             print("Attacking...")
-                            monster.hit(player_weapon.damage)
+                            
+                            #calculate player crit bonus
+                            player_crit_roll = random.random()
+                            if player_crit_roll >= (1 - player_weapon.crit_rate):
+                                player_crit = player_weapon.bonus
+                                print("Critical hit!")
+                            else:
+                                player_crit = 0
+
+                            player_dmg = player_weapon.damage + player_crit
+                            # deal total damage from player
+                            monster.hit(player_dmg)
+
+                            # if monster still alive
                             if monster._hp > 0:
-                                player.hit(monster_weapon.damage)
+                                
+                                # calculate monster damage
+                                monster_crit_roll = random.random()
+                                if monster_crit_roll >= (1 - monster_weapon.crit_rate):
+                                    monster_crit = monster_weapon.bonus
+                                    print(f"The {monster.name} landed a critical hit!")
+                                else:
+                                    monster_crit = 0
+                                monster_dmg = monster_weapon.damage + monster_crit
+
+                                # deal total damage from monster
+                                player.hit(monster_dmg)
+
+                                # if player dies, end game
                                 if player._hp <= 0: 
                                     print(monster.name + " killed you. Better luck next time.")
                                     return
+                                
+                            # if monster dies    
                             elif monster._hp <= 0:
-                                print(data.monster_killed)
+                                print(data.monster_killed + monster.name + ".")
+                                # if monster killed was boss, win screen, end game
                                 if monster.boss == True:
-                                    print(data.boss_win + monster.name + "!")
+                                    print(data.boss_win)
                                     print(data.winscreen)
                                     return
                                 #level up
                                 player.level += 1
                                 #regain health to new max
                                 player._hp = 10 + (player.level * 2)
-                                # exit back to 'main menu'
+                                
                                 print("---------------")
                                 print(data.level_up)
+                                # If level 3, let player know access to weapons increased
+                                if player.level == 3:
+                                    print("You now have access to more weapons.")
                                 print(data.hp_up)
                                 print("---------------")
+                                # Remove dead monster from list
+                                data.monster_list.remove(monster.name)
+                                # exit back to 'main menu'
                                 fighting = False
                                 break
                             
                         elif turn == "info":
+                            # display both HP instead. preference choice on how it's displayed. chose to add current HP to attacks
+                            #display = f"""
+#---------------
+#{player.name} health: {player._hp}
+#{monster.name} health: {monster._hp}
+#---------------"""
+                            #print(display)
                             player.info()
                         elif turn == "monster":
                             monster.info()
                         elif turn == "help":
                             print(data.monster_help)
-                        elif turn == "run":
+                        elif turn == "run": 
                             if monster.boss == True:
                                 print(data.boss_run)
                             else:
                                 print("Running...")
+                                monster_selected = False
                                 break
+                                
                         else:
                             print("Sorry I don't understand that. Please try again.")
                     
@@ -166,26 +223,16 @@ def play_game():
                     break
                     
 
-            # turn based fight mechanics....
-
-            # if not dead, heal back to full
-                # only if you win the fight
-
         else:
             print(data.error_text)
 
     
-
-    
-
-#player.info()
-
-"""
-q = random.random()
-print(q)
-if q >= 0.75:
-    print("Critical Hit!")
-else:
-    print("Hit!")
-"""
 play_game()
+
+
+#text_var = """
+#this is a tester
+#unclear if i can format text to print like this
+#    with a tab too
+#"""
+#print(text_var)

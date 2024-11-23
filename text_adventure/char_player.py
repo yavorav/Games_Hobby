@@ -14,8 +14,10 @@ class Player:
 
     def hit(self, dmg):
         self._hp -= dmg
-        print(f"You were hit for {dmg}HP")
-        if self._hp <= 0:
+        if self._hp < 0:
+            self._hp = 0
+        print(f"You were hit for {dmg}HP, you have {self._hp}HP remaining")
+        if self._hp == 0:
             print("Game over.")
     
     def heal(self):

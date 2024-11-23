@@ -1,5 +1,6 @@
 # Defining all aspects of character creation
 
+import data
 """
 name
 select weapon type, list options
@@ -11,7 +12,7 @@ welcome = "Welcome! Thank you for deciding to play The Best Game Ever. Let's get
 name_prompt = "Please choose a character name: "
 #ty = print("Great!")
 weapon_prompt = "Please choose a weapon from the following:\nSword\nAxe\nFists\n"
-weapon_list = ["Sword", "Axe", "Fists"]
+weapon_list = data.weapons_list[:2]
 reminder = "Reminder, your weapon choices are: Sword, Axe, and Fists"
 
 ###########################
