@@ -72,6 +72,13 @@ monsters
 fighting
     -> how can the fight mechanics actually become harder? they are purely chance based with the crit rate now
         can be similar to runescape, that you increase your 'to hit' chance, and then get access to better weapons that deal more damage & higher crit chance
+difficulty
+    -> option to choose different difficulty levels? could just be normal and hard, where hard requires you to play the perfect game and make the right choice every single time,
+        while normal has leniency in choice because the math will allow for several choice paths to lead to winning
+    -> could also have easy mode where it's impossible to lose and die, but that doesn't seem fun
+    -> does different difficulty require an entire second set of data to pull from? for monster/weapon data to be different? Or can it be a nested dictionary for those things
+        so when it pulls from it in the main game it already checks which difficulty it's pulling from?
+    -> inhereted classes...? could that be helpful here?
 
 
 
