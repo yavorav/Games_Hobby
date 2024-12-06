@@ -6,12 +6,12 @@ import random
 
 # Calls to create a character
 
-#name = "Daisy"
-#weapon = "Sword"
-#level = 1
-#hp = (level * 2)  +10 
+name = "Daisy"
+weapon = "Sword"
+level = 1
+hp = (level * 2)  +10 
 
-name, weapon, level, hp = cc.char_create()
+#name, weapon, level, hp = cc.char_create()
 player = char_player.Player(name, weapon, level, hp)
 weapon = data.Weapon(weapon)
 
@@ -24,20 +24,50 @@ def play_game():
 
     while health > 0:
         #print("---------------")
-        text = input("\nWhat would you like to do now?\n")
+        text = input(data.what_next)
 
-        if text.lower() == "info":
+        if text.lower() == data.menu_info:
             player.info()
 
-        elif text.lower() == "help":
+        elif text.lower() == data.menu_help:
             print(data.help_text)
 
-        elif text.lower() == "quit":
-            print("Bye bye, thanks for playing!")
+        elif text.lower() == data.menu_quit:
+            print(data.quit_text)
             return
         
-        elif text.lower() == "weapons":
+        elif text.lower() == data.menu_weapons:
             # Can choose to change weapon
+            print(data.blacksmith_welcome)
+            print(data.blacksmith_options)
+            x = ""
+            while x != data.menu_quit:
+                x = input().lower()
+                if x == data.blacksmith_stats:
+                    print(data.blacksmith_stats_text, player.weapon)
+                    old_weapon = data.Weapon(player.weapon)
+                    old_weapon.info()
+                    # after printing info it takes you back to the blacksmith menu. Shoul we ask if you need anything else?
+                elif x == data.blacksmith_change:
+                    print(data.blacksmith_change_text)
+                    if player.level < 3:
+                        for i in range(3):
+                            print(data.weapons_list[i])
+                    elif player.level >= 3:
+                        for i in range(5):
+                            print(data.weapons_list[i])
+                    #y = input().title()
+
+                    pass
+                elif x == data.blacksmith_upgrade:
+
+                    pass
+                elif x == data.menu_quit:
+                    break
+                elif x != "quit":
+                    print("Please try again.")
+                
+            """
             print("The weapons you have available are: ")
             if player.level < 3:
                 for i in range(3):
@@ -45,7 +75,7 @@ def play_game():
             elif player.level >= 3:
                 for i in range(5):
                     print(data.weapons_list[i])
-           
+            
             old_weapon = data.Weapon(player.weapon)
             old_weapon.info()
             print("Would you like to change your weapon from: " + str(player.weapon) + "?")
@@ -93,7 +123,9 @@ def play_game():
                 elif x != "quit":
                     print("Please try again.")
 
-        elif text.lower() == "fight":
+            """    
+
+        elif text.lower() == data.menu_fight:
             # Choose a monster to fight
             print(data.monster_intro)
             for i in range(len(data.monster_list)):

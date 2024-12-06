@@ -8,14 +8,59 @@ weapon_prompt = "Please choose a weapon from the following:\nFists\nAxe\nSword\n
 weapon_unlock = 3
 weapon_reminder = "Reminder, your weapon choices are: Fists, Axe, and Sword"
 weapon_error = "Sorry, the weapon you chose is not an option. Please try again."
-
 character_success = "You've successfully created a character!"
 
 
 # Main game text
-instructions = "Welcome to the game, your keyboard commands are 'weapons', 'fight', 'help', 'info', 'quit'. Good luck!"
+"""
+What if the 'main menu' area is like a city? and you have the options of 
+tavern, weapons shop/blacksmith, inn to rest. Still have options for help and quit obviously
+And obviously the go fight monsters option.
+
+>> could be like the 'dating sim' in that fighting monsters gains you honour and depending on how
+much honour you have people might interact with you differently?
+depends if i want to lean into the dialogue tree thing and give options for dialogue, or if more
+honour would just unlock more menu options, like how I unlocked more weapons at level 3 style of thing
+
+>> should levels be XP based...? that different monsters give different amounts of XP to level up, or keep it milestone
+based and level with each monster??
+OMG what if after killing Chthulu it unlocks the next area of the game and now you're a 'mighty adventurer' that
+shows up to town and it turns into a dating sim game lmao, partially based on how you killed the boss ie. what weapon and level you were at
+
+"""
+
+
+# welcome to Summerstorm City, Steelcrest City, Riverfair City, The City of Coldburn
+# The Copper Triangle Tavern
+
+# menu options
+menu_info = "info"
+menu_help = "help"
+menu_quit = "quit"
+menu_weapons = "blacksmith" # weapons menus
+menu_fight = "fight" # still option to go fight monsters
+menu_tavern = "tavern" # place to heal? or just eat and chat? buy stuff
+
+instructions = "Welcome to Summerstorm City! Your keyboard commands are", menu_info, menu_help, menu_weapons, menu_tavern, menu_fight, "and", menu_quit, ". Good luck!"
+what_next = "\nWhat would you like to do now?\n"
+
+
 help_text = "Your keyboard commands are:\nweapons - allows you to change weapons\nfight - takes you to the monsters\nhelp - will remind you of the commands\ninfo - will show you your character stats\nquit - will exit the game"
 error_text = "Sorry, I don't understand that command. Try typing 'help' if you don't remember the commands available."
+quit_text = "Bye bye, thanks for playing!"
+
+# Blacksmith text
+blacksmith_welcome = "Welcome to Belly Fires smithy! Name's Oryk, what can I do for you?"
+blacksmith_options = "Weapon Stats      Change Weapon       Upgrade Weapon"
+blacksmith_stats = "stats"
+blacksmith_stats_text = "Let's see here, looks like you've got a"
+blacksmith_change = "change"
+blacksmith_change_text = "Sure, let's see what else we got for ya."
+blacksmith_upgrade = "upgrade"
+blacksmith_upgrade_text = ""
+
+# Tavern text
+
 monster_intro = "You head out to slay monsters. Before you are several monsters, please choose which you'd like to fight first: "
 boss_fight = "---------------\nBOSS FIGHT\n---------------"
 boss_run = "There's no running from a boss fight! Get in there and fight!"
@@ -29,6 +74,10 @@ winscreen = "---------------\nThank you for playing The Best Game Ever!!\nI hope
 
 
 # monster dictionary, name:[description, weapon, Boss? Boolean, HP]
+# assign levels to monsters, create list of monsters equal to and below your level
+# When you go to fight monsters it randomly selects one of your level or lower
+# Will need a much larger selection of monsters, or different levels of each monster,
+# could randomize both the level they appear at and which monster you get
 monsters = {
     "Troll" : ["A large hairy monster often found under bridges.", "Club", False, 8],
     "Zombie" : ["A putrid undead creature.", "Claws", False, 10], 
